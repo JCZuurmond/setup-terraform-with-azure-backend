@@ -2,9 +2,6 @@ name: 'Terraform with Azure backend'
 description: 'Setup resources for an Azure backend'
 author: 'Cor Zuurmond <jczuurmond@protonmail.com>'
 inputs:
-  service_principal_credentials:
-    description: 'The service principal credentials'
-    required: true
   resource_group:
     description: 'The resource group name'
     required: false
@@ -20,11 +17,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - name: Azure Login
-    uses: azure/login@v1
-    with:
-      creds: ${{ inputs.service_principal_credentials }}
-
   - name: Create resources for Terraform Azure backend
     uses: azure/CLI@v1
     with:
