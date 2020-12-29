@@ -1,0 +1,23 @@
+name: 'Terraform with Azure backend'
+description: 'Setup resources for an Azure backend'
+author: 'Cor Zuurmond <jczuurmond@protonmail.com>'
+inputs:
+  service_principal_credentials:
+    description: 'The service principal credentials'
+    required: true
+  resource_group:
+    description: 'The resource group name'
+    required: false
+    default: 'terraform'
+  storage_account:
+    description: 'The storage account name'
+    required: false
+    default: 'tfstate'
+  container_name:
+    description: 'The container name'
+    required: false
+    default: 'tfstate'
+  container_name:
+    description: 'The container name'
+    required: false
+    default: 'tfstate'
