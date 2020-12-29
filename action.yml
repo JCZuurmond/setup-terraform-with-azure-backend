@@ -17,10 +17,6 @@ inputs:
     description: 'The container name'
     required: false
     default: 'tfstate'
-  container_name:
-    description: 'The container name'
-    required: false
-    default: 'tfstate'
 runs:
   using: "composite"
   steps:
