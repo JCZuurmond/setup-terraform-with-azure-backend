@@ -18,15 +18,8 @@ runs:
   using: "composite"
   steps:
   - name: Create resources for Terraform Azure backend
-    uses: azure/CLI@v1
-    with:
-      azcliversion: 2.16.0
-      inlineScript: |
-        az group create --name $TERRAFORM_RESOURCE_GROUP_NAME --location westeurope
-        az storage account create --resource-group $TERRAFORM_RESOURCE_GROUP_NAME --name $TERRAFORM_STORAGE_ACCOUNT --sku Standard_LRS --encryption-services blob
-        ACCOUNT_KEY=$(az storage account keys list --resource-group $TERRAFORM_RESOURCE_GROUP_NAME --account-name $TERRAFORM_STORAGE_ACCOUNT -o json | jq '.[0].value' --raw-output)
-        az storage container create --name $TERRAFORM_CONTAINER_NAME --account-name $TERRAFORM_STORAGE_ACCOUNT --account-key $ACCOUNT_KEY
-    env:
-      TERRAFORM_RESOURCE_GROUP_NAME: ${{ inputs.resource_group }}
-      TERRAFORM_STORAGE_ACCOUNT: ${{ inputs.storage_account }}
-      TERRAFORM_CONTAINER_NAME: ${{ inputs.container_name }}
+    run: |
+      az group create --name ${{ inputs.resource_group }} --location westeurope
+      az storage account create --resource-group ${{ inputs.resource_group }} --name ${{ inputs.storage_account }} --sku Standard_LRS --encryption-services blob
+      ACCOUNT_KEY=$(az storage account keys list --resource-group ${{ inputs.resource_group }} --account-name ${{ inputs.storage_account }} -o json | jq '.[0].value' --raw-output)
+      az storage container create --name ${{ inputs.container_name }} --account-name ${{ inputs.storage_account }} --account-key $ACCOUNT_KEY
