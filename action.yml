@@ -18,6 +18,7 @@ runs:
   using: "composite"
   steps:
   - name: Create resources for Terraform Azure backend
+    shell: bash
     run: |
       az group create --name ${{ inputs.resource_group }} --location westeurope
       az storage account create --resource-group ${{ inputs.resource_group }} --name ${{ inputs.storage_account }} --sku Standard_LRS --encryption-services blob
